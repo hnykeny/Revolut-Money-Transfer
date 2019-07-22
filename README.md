@@ -52,7 +52,7 @@ RequestBody:
 | :--- | :--- | :--- |
 | `customerId` | `long` |  **Required**. Id of the customer  |
 | `beneficiaryId` | `long` |  **Required**. Id of the beneficiary  |
-| `amount` | `double` |  **Required**. amount to be transfered |
+| `amount` | `double` |  **Required**. amount to be transferred |
 
 
 ## Status Codes
