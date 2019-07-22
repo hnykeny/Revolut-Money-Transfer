@@ -35,6 +35,7 @@ GET /api/accounts?id=[long]
 POST /api/accounts
 ```
 RequestBody:
+
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
 | `id` | `long` |  **Required**. Unique Customer Id  |
@@ -46,6 +47,7 @@ RequestBody:
 PUT /api/accounts
 ```
 RequestBody:
+
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
 | `customerId` | `long` |  **Required**. Id of the customer  |
