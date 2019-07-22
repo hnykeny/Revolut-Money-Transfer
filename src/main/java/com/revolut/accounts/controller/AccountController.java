@@ -102,7 +102,7 @@ public class AccountController extends BaseController {
         accountService.addAccount(account);
 
         return new ResponseEntity<>("",
-                getHeaders(Constants.CONTENT_TYPE, Constants.APPLICATION_JSON), HttpStatus.ACCEPTED);
+                getHeaders(Constants.CONTENT_TYPE, Constants.APPLICATION_JSON), HttpStatus.CREATED);
     }
 
     private ResponseEntity<String> transferAmount(InputStream is) {

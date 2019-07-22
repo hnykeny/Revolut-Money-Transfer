@@ -58,7 +58,7 @@ public class PostApiTests extends BaseIntegrationTest {
         HttpResponse httpResponse = HttpClientBuilder.create().build().execute(request);
 
         // Then
-        assertThat(httpResponse.getStatusLine().getStatusCode(), equalTo(HttpStatus.SC_ACCEPTED));
+        assertThat(httpResponse.getStatusLine().getStatusCode(), equalTo(HttpStatus.SC_CREATED));
         assertEquals(13, AccountDataStore.getInstance().getAllAccounts().size());
     }
 
