@@ -20,14 +20,14 @@ GET /api/accounts
 ```
 --
 ```http
-GET /api/accounts?id=[long]
+GET /api/accounts/{id}
 ```
 **Returns**
 ```javascript
 {
     "id" : long,
     "name" : string,
-    "balance" : double
+    "balance" : number upto 2 decimal places
 }
 ```
 ### Create new account**
@@ -40,11 +40,11 @@ RequestBody:
 | :--- | :--- | :--- |
 | `id` | `long` |  **Required**. Unique Customer Id  |
 | `name` | `string` |  **Required**. Full name of the customer  |
-| `balance` | `double` |  **Optional**. Opening balance. If not provided, defaults to 0.00 |
+| `balance` | `string` |  **Optional**. Opening balance parsed to decimal. If not provided, defaults to 0.00 |
 
 **Transfer money**
 ```http
-PUT /api/accounts
+POST /api/accounts/transfer
 ```
 RequestBody:
 
@@ -52,7 +52,7 @@ RequestBody:
 | :--- | :--- | :--- |
 | `customerId` | `long` |  **Required**. Id of the customer  |
 | `beneficiaryId` | `long` |  **Required**. Id of the beneficiary  |
-| `amount` | `double` |  **Required**. amount to be transferred |
+| `amount` | `string` |  **Required**. amount to be transferred, parsed to double |
 
 
 ## Status Codes
