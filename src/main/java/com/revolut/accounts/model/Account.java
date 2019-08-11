@@ -1,12 +1,12 @@
 package com.revolut.accounts.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.concurrent.locks.ReentrantLock;
+
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Account {
@@ -17,4 +17,13 @@ public class Account {
     private String name;
 
     private Double balance;
+
+    private ReentrantLock lock;
+
+    public Account(Long id, String name, Double balance) {
+        this.id = id;
+        this.name = name;
+        this.balance = balance;
+        this.lock = new ReentrantLock();
+    }
 }

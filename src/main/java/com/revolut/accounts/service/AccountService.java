@@ -9,6 +9,7 @@ import com.revolut.accounts.util.Constants;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -79,15 +80,23 @@ public class AccountService {
      * @throws ResourceNotFoundException    if account with id does not exists
      * @throws NullPointerException         if the either of the specified id is null
      */
-    public synchronized void transferAmount(Long customerId, Long beneficiaryId, Double amount) throws InSufficientBalanceException, ResourceNotFoundException {
+    public void transferAmount(Long customerId, Long beneficiaryId, Double amount) throws InSufficientBalanceException, ResourceNotFoundException {
         Account customer = getAccountById(customerId);
         Account beneficiary = getAccountById(beneficiaryId);
+        ReentrantLock firstLock = customerId < beneficiaryId ? customer.getLock() : beneficiary.getLock();
+        ReentrantLock secondLock = customerId < beneficiaryId ? beneficiary.getLock() : customer.getLock();
+        firstLock.lock();
+        secondLock.lock();
         if (customer.getBalance() >= amount) {
             accountRepo.updateAccount(customerId, customer.getBalance() - amount);
             accountRepo.updateAccount(beneficiaryId, beneficiary.getBalance() + amount);
+            firstLock.unlock();
+            secondLock.unlock();
             LOGGER.info(String.format("TransferAmount : Success : details={customerId=%d, beneficiaryId=%d, amount=%s}", customerId, beneficiaryId, amount));
         } else {
             LOGGER.info(String.format("TransferAmount : Insufficient Balance : details={customerId=%d, customerBalance=%s, beneficiaryId=%d, beneficiaryBalance=%s, amount=%s}", customerId, customer.getBalance(), beneficiaryId, beneficiary.getBalance(), amount));
+            firstLock.unlock();
+            secondLock.unlock();
             throw new InSufficientBalanceException();
         }
     }
