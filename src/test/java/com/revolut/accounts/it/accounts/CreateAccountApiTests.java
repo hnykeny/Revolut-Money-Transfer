@@ -20,7 +20,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-public class PostApiTests extends BaseIntegrationTest {
+public class CreateAccountApiTests extends BaseIntegrationTest {
 
     // POST Accounts :: No Accept Header :: Default Response JSON Content
     @Test
@@ -50,7 +50,7 @@ public class PostApiTests extends BaseIntegrationTest {
         JSONObject account = new JSONObject();
         account.put("id", 13);
         account.put("name", "Lilly");
-        account.put("balance", 123.34);
+        account.put("balance", "123.34");
 
         request.setEntity(new StringEntity(account.toJSONString()));
 
@@ -72,7 +72,7 @@ public class PostApiTests extends BaseIntegrationTest {
 
         JSONObject account = new JSONObject();
         account.put("name", "Lilly");
-        account.put("balance", 123.34);
+        account.put("balance", "123.34");
 
         request.setEntity(new StringEntity(account.toJSONString()));
 
@@ -96,7 +96,7 @@ public class PostApiTests extends BaseIntegrationTest {
 
         JSONObject account = new JSONObject();
         account.put("id", 13);
-        account.put("balance", 123.34);
+        account.put("balance", "123.34");
 
         request.setEntity(new StringEntity(account.toJSONString()));
 
@@ -121,7 +121,7 @@ public class PostApiTests extends BaseIntegrationTest {
         JSONObject account = new JSONObject();
         account.put("id", 13);
         account.put("name", "Karl");
-        account.put("balance", -123.34);
+        account.put("balance", "-123.34");
 
         request.setEntity(new StringEntity(account.toJSONString()));
 
@@ -146,7 +146,7 @@ public class PostApiTests extends BaseIntegrationTest {
         JSONObject account = new JSONObject();
         account.put("id", 9);
         account.put("name", "Karl");
-        account.put("balance", 123.34);
+        account.put("balance", "123.34");
 
         request.setEntity(new StringEntity(account.toJSONString()));
 
@@ -171,7 +171,7 @@ public class PostApiTests extends BaseIntegrationTest {
         JSONObject account = new JSONObject();
         account.put("id", "asd");
         account.put("name", "Karl");
-        account.put("balance", 123.34);
+        account.put("balance", "123.34");
 
         request.setEntity(new StringEntity(account.toJSONString()));
 

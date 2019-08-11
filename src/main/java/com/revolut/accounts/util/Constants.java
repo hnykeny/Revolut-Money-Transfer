@@ -6,10 +6,11 @@ public class Constants {
     public static final String APPLICATION_JSON = "application/json";
 
     public static final String ROUTE_ACCOUNTS = "/api/accounts";
+    public static final String ROUTE_ACCOUNTS_TRANSFER = "/api/accounts/transfer";
 
     public static final String EXCEPTION_MESSAGE_ID_IS_NULL = "Id cannot be null";
     public static final String EXCEPTION_MESSAGE_INVALID_REQUEST = "Invalid Request";
-    public static final String EXCEPTION_MESSAGE_NAME_IS_NULL = "Name cannot be null";
+    public static final String EXCEPTION_MESSAGE_NAME_IS_NULL = "Name cannot be null, empty or blank.";
     public static final String EXCEPTION_MESSAGE_USER_NOT_FOUND = "User Does Not Exists";
     public static final String EXCEPTION_MESSAGE_USER_ALREADY_EXISTS = "User Already Exists";
     public static final String EXCEPTION_MESSAGE_ID_IS_NOT_VALID = "Id is not a valid number";

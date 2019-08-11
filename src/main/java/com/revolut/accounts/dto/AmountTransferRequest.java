@@ -6,5 +6,5 @@ import lombok.Data;
 public class AmountTransferRequest {
     private Long customerId;
     private Long beneficiaryId;
-    private Double amount;
+    private String amount;
 }
