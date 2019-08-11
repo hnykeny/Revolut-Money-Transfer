@@ -13,7 +13,7 @@ GET /api/accounts
     {
     "id" : long,
     "name" : string,
-    "balance" : double
+    "balance" : number upto 2 decimal places
     },
     ...
 ]
