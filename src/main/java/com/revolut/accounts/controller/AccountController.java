@@ -38,10 +38,13 @@ public class AccountController extends BaseController {
         byte[] response;
         ResponseEntity responseEntity;
         if ("GET".equals(exchange.getRequestMethod())) {
-            if (Objects.isNull(exchange.getRequestURI().getRawQuery()))
+            String[] pathTokens = exchange.getRequestURI().toString().split("/");
+            if (pathTokens.length == 4 && !pathTokens[3].isBlank())
+                responseEntity = getAccount(exchange, pathTokens[3]);
+            else if (pathTokens.length < 4)
                 responseEntity = getAllAccounts();
             else
-                responseEntity = getAccount(exchange);
+                throw new InvalidRequestException(Constants.EXCEPTION_MESSAGE_INVALID_REQUEST);
         } else if ("POST".equals(exchange.getRequestMethod())) {
             if (exchange.getRequestURI().toString().equals(Constants.ROUTE_ACCOUNTS_TRANSFER))
                 responseEntity = transferAmount(exchange.getRequestBody());
@@ -66,13 +69,7 @@ public class AccountController extends BaseController {
                 getHeaders(Constants.CONTENT_TYPE, Constants.APPLICATION_JSON), HttpStatus.OK);
     }
 
-    private ResponseEntity<Account> getAccount(HttpExchange exchange) {
-        Map<String, List<String>> params = ApiUtils.splitQuery(exchange.getRequestURI().getRawQuery());
-        String idStr = params.getOrDefault("id", List.of("")).stream().findFirst().get();
-        if (idStr.isEmpty()) {
-            LOGGER.info(exchange.getRequestMethod() + " - " + exchange.getRequestURI() + " : id is null");
-            throw new InvalidRequestException(Constants.EXCEPTION_MESSAGE_ID_IS_NULL);
-        }
+    private ResponseEntity<Account> getAccount(HttpExchange exchange, String idStr) {
         try {
             Account account = accountService.getAccountById(Long.parseLong(idStr));
 

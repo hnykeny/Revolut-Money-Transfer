@@ -70,14 +70,14 @@ public class GetApiTests extends BaseIntegrationTest {
     givenGetAccountRequestWithoutIdParameters_WhenExecuted_Exception() throws IOException {
 
         // Given
-        HttpUriRequest request = new HttpGet(URL + "?tes_param=36");
+        HttpUriRequest request = new HttpGet(URL + "/as32");
 
         // When
         HttpResponse httpResponse = HttpClientBuilder.create().build().execute(request);
 
         // Then
         assertEquals(HttpStatus.SC_BAD_REQUEST, httpResponse.getStatusLine().getStatusCode());
-        assertEquals("{\"message\":\"" + Constants.EXCEPTION_MESSAGE_ID_IS_NULL + "\"}",
+        assertEquals("{\"message\":\"" + Constants.EXCEPTION_MESSAGE_ID_IS_NOT_VALID + "\"}",
                 new String(httpResponse.getEntity().getContent().readAllBytes()));
     }
 
@@ -87,7 +87,7 @@ public class GetApiTests extends BaseIntegrationTest {
     givenGetAccountRequestWithValidIdParameter_WhenExecuted_ReturnAccount() throws IOException, ParseException {
 
         // Given
-        HttpUriRequest request = new HttpGet(URL + "?id=9");
+        HttpUriRequest request = new HttpGet(URL + "/9");
 
         // When
         HttpResponse httpResponse = HttpClientBuilder.create().build().execute(request);
@@ -107,7 +107,7 @@ public class GetApiTests extends BaseIntegrationTest {
     givenGetAccountRequestWithInvalidIdParameter_WhenExecuted_Exception() throws IOException {
 
         // Given
-        HttpUriRequest request = new HttpGet(URL + "?id=234");
+        HttpUriRequest request = new HttpGet(URL + "/234");
 
         // When
         HttpResponse httpResponse = HttpClientBuilder.create().build().execute(request);
@@ -124,7 +124,7 @@ public class GetApiTests extends BaseIntegrationTest {
     givenGetAccountRequestWithStringIdParameter_WhenExecuted_Exception() throws IOException {
 
         // Given
-        HttpUriRequest request = new HttpGet(URL + "?id=asd");
+        HttpUriRequest request = new HttpGet(URL + "/asd");
 
         // When
         HttpResponse httpResponse = HttpClientBuilder.create().build().execute(request);
